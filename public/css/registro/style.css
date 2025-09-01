@@ -1,0 +1,53 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+header {
+    display: flex;           /* organiza en fila */
+    align-items: center;     /* centra verticalmente */
+    justify-content: flex-start; /* asegura que todo arranque a la izquierda */
+    background-color: #ecfeff;
+}
+h2{
+    margin: 0 auto;       /* centra horizontalmente */
+    text-align: center;
+}
+
+.logo {
+    width: 200px;   /* tamaño del logo */
+    height: auto;  /* mantiene proporción */
+    margin-right: 15px; /* separa del texto */
+}
+.container {
+    display: flex;
+    height: 100vh;
+}
+.column-left {
+    flex: 0 0 20%;
+    padding: 20px;
+    display: flex;
+    align-items: center;  
+}
+.column-right {
+    flex: 1;
+    padding: 20px;
+}
+.field {
+    display: flex;
+    align-items: center;       /* centra verticalmente label e input */
+    margin-bottom: 15px;       /* espacio entre campos */
+}
+
+.field label {
+    width: 150px;              /* ancho fijo para los labels */
+    text-align: right;         /* alineación del texto a la derecha */
+    margin-right: 10px;        /* espacio entre label e input */
+}
+
+.field .input,
+.field .select {
+    flex: 1;                   /* ocupa el resto del espacio */
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
