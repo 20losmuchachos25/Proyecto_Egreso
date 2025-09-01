@@ -7,5 +7,9 @@
 </head>
 <body>
     <h1>ESTA PAGINA SE ENCUENTRA EN DESARROLLO</h1>
+    <br>
+    <form action="{{ route('verLogin') }}">
+        <input type="submit" value="Cerrar Sesion">
+    </form>
 </body>
 </html>
