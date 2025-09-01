@@ -22,9 +22,19 @@ class LoginController extends Controller
         $user = Usuario::where('Documento', $credentials['Documento'])->first();
 
         if ($user && password_verify($credentials['Password'], $user->Password)) {
-            // Autenticación exitosa
-            // Aquí puedes iniciar sesión y redirigir al usuario según su rol
-            return redirect()->route('verRegistro'); // Cambia 'dashboard' por la ruta deseada
+            $tipo = $user->tipo_usuario;
+
+            switch ($tipo) {
+                case 'Cliente':
+                    return redirect()->route('Desarrollo');
+                case 'Funcionario':
+                    return redirect()->route('Welcome');
+                case 'Administrativo':
+                    return redirect()->route('Welcome');
+                default:
+                    return back()->withErrors(['Documento' => 'No se pudo determinar el tipo de usuario.']);
+
+            }
         } else {
             // Autenticación fallida
             return back()->withErrors(['Documento' => 'Credenciales inválidas.'])->withInput();

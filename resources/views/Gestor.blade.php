@@ -18,9 +18,9 @@
         </header>
         <div class="container">
             <div class="column-left">
-                <button>
-                    GESTOR DE USUARIOS
-                </button>
+                <form action="{{ route('Welcome') }}">
+                    <input type="submit" value="WELCOME">
+                </form>
             </div>
             <div class="column-right">
                 {{-- Tabla de usuarios --}}

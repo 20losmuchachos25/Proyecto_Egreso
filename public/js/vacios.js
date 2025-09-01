@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.querySelector('form');
+    const form = document.getElementById('registroForm');
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();

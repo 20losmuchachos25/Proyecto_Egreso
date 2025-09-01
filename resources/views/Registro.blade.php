@@ -18,9 +18,9 @@
     </header>
     <div class="container">
         <div class="column-left">
-            <button>
-                REGISTRO DE USUARIOS
-            </button>
+            <form action="{{ route('Welcome') }}">
+                    <input type="submit" value="WELCOME">
+            </form>
         </div>
         <div class="column-right">
             {{-- Mensajes de validación --}}
@@ -42,6 +42,7 @@
             @endif
 
             <form action="{{ route('NuevoUsuario') }}" method="POST">
+            <form id="registroForm" action="{{ route('NuevoUsuario') }}" method="POST">
                 @csrf
                 <div class="grid">
                 <div class="field">

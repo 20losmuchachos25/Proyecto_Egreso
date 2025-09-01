@@ -6,7 +6,7 @@ header {
     display: flex;           /* organiza en fila */
     align-items: center;     /* centra verticalmente */
     justify-content: flex-start; /* asegura que todo arranque a la izquierda */
-    background-color: #ecfeff;
+    /*background-color: #ecfeff;*/
 }
 h2{
     margin: 0 auto;       /* centra horizontalmente */
