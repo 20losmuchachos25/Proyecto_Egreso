@@ -1,0 +1,9 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+.logo {
+    width: 200px;   /* tamaño del logo */
+    height: auto;  /* mantiene proporción */
+    margin-right: 15px; /* separa del texto */
+}

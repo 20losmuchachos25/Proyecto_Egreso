@@ -1,0 +1,30 @@
+body{
+    text-align: center;
+}
+table {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+th {
+    background-color: #d9e1f2; /* azul claro típico de Excel */
+    font-weight: bold;
+    color: #000;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* gris muy claro para alternar filas */
+}
+
+tr:hover {
+    background-color: #c6d9f1; /* hover sutil tipo Excel */
+}
