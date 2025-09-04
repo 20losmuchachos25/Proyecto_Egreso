@@ -33,3 +33,23 @@ h2{
   color: #333;
   font-weight: 500;
 }
+.barra{
+    background-color: #57cbd1;
+    width: 100%;/* ocupa todo el ancho de la pantalla */
+    height: 100px;
+    left: 0;
+    right: 0;
+    margin-bottom: 100px;
+}
+.contenedor{
+    display: flex;
+    height: 100vh;
+}
+.left {
+    flex: 0 0 20%;
+    padding: 20px;
+}
+.right {
+    flex: 1;
+    padding: 20px;
+}
