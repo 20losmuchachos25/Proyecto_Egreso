@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GestorController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\WelocomeAdminController;
 
 // Regitro para registrar usuarios
@@ -26,6 +26,10 @@ Route::get('/Desarrollo', [DesarrolloController::class, 'index'])->name('Desarro
 
 // Ruta para Welcome Admin
 Route::get('/WelcomeAdmin', [WelocomeAdminController::class, 'WelcomeAdmin'])->name('Welcome');
+
+// Ruta Principal
+Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Principal');
+
 
 
 
