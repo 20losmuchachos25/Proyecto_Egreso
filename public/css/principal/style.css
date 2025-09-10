@@ -46,10 +46,8 @@ h2{
     height: 100vh;
 }
 .left {
-    flex: 0 0 20%;
-    padding: 20px;
+    flex: 1;
 }
 .right {
     flex: 1;
-    padding: 20px;
 }
