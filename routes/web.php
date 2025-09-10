@@ -7,6 +7,7 @@ use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\WelocomeAdminController;
+use App\Http\Controllers\AgendaController;
 
 // Regitro para registrar usuarios
 Route::get('/Registro', [RegistroController::class, 'index'])->name('verRegistro');
@@ -29,6 +30,9 @@ Route::get('/WelcomeAdmin', [WelocomeAdminController::class, 'WelcomeAdmin'])->n
 
 // Ruta Principal
 Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Principal');
+
+// Ruta Agenda
+Route::get('/Agenda', [AgendaController::class, 'Agenda'])->name('Agenda');
 
 
 

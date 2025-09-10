@@ -12,6 +12,9 @@
     <form action="{{ route('verGestor') }}">
         <input type="submit" value="Gestionar Usuarios">
     </form>
+    <form action="{{ route('Agenda') }}">
+        <input type="submit" value="Agenda">
+    </form>
     <form action="{{ route('verLogin') }}">
         <input type="submit" value="Cerrar Sesion">
     </form>
