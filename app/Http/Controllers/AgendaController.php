@@ -26,14 +26,16 @@ class AgendaController extends Controller
     {
         $request->validate([
             'Fecha' => 'required|date',
-            'Hora' => 'required|date_format:H:i'
+            'Hora' => 'required|date_format:H:i',
+            'Motivo' => 'nullable|string'
         ]);
 
         $datos = $request->all();
         $datos['Doc_Cliente'] = session('Documento');
 
         if (Agenda::create($datos)) {
-            return response()->json(['message' => 'Agenda creada con éxito']);
+            return back()->with('success', 'Agenda creada correctamente.');
+
         } else {
             return response()->json(['message' => 'Upss!!!'], 500);
         }   

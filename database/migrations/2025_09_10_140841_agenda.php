@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('Hora');
             $table->integer('Duracion');
             $table->string('Estado_Cita');
+            $table->string('Motivo')->nullable();
 
 
             $table->foreign('Doc_Cliente')

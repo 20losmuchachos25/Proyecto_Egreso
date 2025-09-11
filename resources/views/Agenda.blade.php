@@ -33,8 +33,10 @@
                                 <th>Email</th>
                                 <th>Fecha</th>
                                 <th>Hora</th>
+                                <th>Motivo</th>
                                 <th>Duracion Aprox (min)</th>
                                 <th>Estado</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,12 +51,14 @@
                                     <td>{{ $agenda->usuario?->Email }}</td>
                                     <td>{{ $agenda->Fecha }}</td>
                                     <td>{{ $agenda->Hora }}</td>
+                                    <td>{{ $agenda->Motivo }}</td>
                                     <td>{{ $agenda->Duracion }}</td>
                                     <td>{{ $agenda->Estado_Cita }}</td>
+                                    <td><form action=""><input type="hidden" name="id" value="{{ $agenda->id }}"><input type="submit" value="Ver"></form></td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="13">No se encontraron agendas registradas.</td>
+                                    <td colspan="11">No se encontraron agendas registradas.</td>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -12,7 +12,7 @@ class Agenda extends Model
 
     
     protected $fillable = [
-        'Doc_Cliente','Fecha','Hora','Duracion','Estado_Cita'
+        'Doc_Cliente','Fecha','Hora','Duracion','Estado_Cita','Motivo'
     ];
 
     protected $attributes = [

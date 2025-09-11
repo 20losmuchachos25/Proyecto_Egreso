@@ -17,6 +17,21 @@
             </form>
         </div>
         <div class="column-right">
+            {{-- Mensajes de validación --}}
+            @if ($errors->any())
+                <div style="color: red;">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                </div>
+            @endif
+
+            {{-- Mensaje de éxito --}}
+            @if(session('success'))
+                <div style="color: green;">
+                    {{ session('success') }}
+                </div>
+            @endif
             <form action="{{ route('RegistrarAgenda') }} " method="POST">
                 @csrf
                 <label for="fecha">Fecha</label>
@@ -24,6 +39,9 @@
                 <br>
                 <label for="hora">Hora</label>
                 <input type="time" id="Hora" name="Hora">
+                <br>
+                <label for="Motivo">Motivo</label>
+                <textarea name="Motivo" id="Motivo" placeholder="Detalle motivo ..."></textarea>
                 <br>
                 <input type="submit" value="Enviar">
             </form>
