@@ -54,7 +54,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="13">No se encontraron agendas registrados.</td>
+                                    <td colspan="13">No se encontraron agendas registradas.</td>
                                 </tr>
                             @endforelse
                         </tbody>

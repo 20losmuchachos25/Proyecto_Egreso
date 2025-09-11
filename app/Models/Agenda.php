@@ -8,13 +8,16 @@ class Agenda extends Model
 {
     protected $table='agenda';
     protected $primaryKey='id';
+    public $timestamps = false;
+
     
     protected $fillable = [
-        'id','Doc_cliente','Fecha','Hora','Duracion','Estado_Cita'
+        'Doc_Cliente','Fecha','Hora','Duracion','Estado_Cita'
     ];
 
     protected $attributes = [
         'Estado_Cita' => 'Pendiente de confirmación', // Valor por defecto en el modelo
+        'Duracion' => 0,
     ];
 
     // Relación con Cliente

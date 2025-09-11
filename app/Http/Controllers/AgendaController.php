@@ -12,7 +12,30 @@ class AgendaController extends Controller
         $agendas = Agenda::with(['cliente', 'usuario'])->get();        
         return view('Agenda', compact('agendas'));    
     }
+
+    public function Registro_Agenda()
+    {
+        return view('Registro_Agenda');
+    }
+
     public function BuscarAgendas(){
         
+    }
+
+    public function Registrar_Agenda(Request $request)
+    {
+        $request->validate([
+            'Fecha' => 'required|date',
+            'Hora' => 'required|date_format:H:i'
+        ]);
+
+        $datos = $request->all();
+        $datos['Doc_Cliente'] = session('Documento');
+
+        if (Agenda::create($datos)) {
+            return response()->json(['message' => 'Agenda creada con éxito']);
+        } else {
+            return response()->json(['message' => 'Upss!!!'], 500);
+        }   
     }
 }

@@ -26,7 +26,8 @@ class LoginController extends Controller
 
             switch ($tipo) {
                 case 'Cliente':
-                    return redirect()->route('Desarrollo');
+                    session(['Documento' => $credentials['Documento']]);
+                    return redirect()->route('RegistroAgenda');
                 case 'Funcionario':
                     return redirect()->route('Welcome');
                 case 'Administrativo':

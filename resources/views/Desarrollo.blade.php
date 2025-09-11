@@ -7,6 +7,11 @@
 </head>
 <body>
     <h1>ESTA PAGINA SE ENCUENTRA EN DESARROLLO</h1>
+    <p>
+        <?php 
+            echo session('Documento'); 
+        ?>
+    </p>
     <br>
     <form action="{{ route('verLogin') }}">
         <input type="submit" value="Cerrar Sesion">
