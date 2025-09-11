@@ -40,4 +40,9 @@ class AgendaController extends Controller
             return response()->json(['message' => 'Upss!!!'], 500);
         }   
     }
+
+    public function Buscar_Agenda(Request $request)
+    {
+        
+    }
 }
