@@ -36,7 +36,7 @@ Route::get('/Agenda', [AgendaController::class, 'Agenda'])->name('Agenda');
 Route::get('/Agenda/RegistroAgenda', [AgendaController::class, 'Registro_Agenda'])->name('RegistroAgenda');
 Route::post('/Agenda/Registrar_Agenda', [AgendaController::class, 'Registrar_Agenda'])->name('RegistrarAgenda');
 Route::get('/Agenda/VerAgenda', [AgendaController::class, 'Buscar_Agenda'])->name('VerAgenda');
-
+Route::post('/Agenda/ModificarAgenda', [AgendaController::class, 'Modificar_Agenda'])->name('ModificarAgenda');
 
 
 

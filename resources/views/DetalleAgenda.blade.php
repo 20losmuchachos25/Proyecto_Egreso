@@ -36,7 +36,8 @@
         <br>
         <br>
 
-        <form action="" method="post">
+        <form action="{{ route('ModificarAgenda') }}" method="post">
+            @csrf
             <input type="hidden" id="id" name="id" value="{{ $agenda->id }}">
 
             <label for="Fecha">Fecha</label>
@@ -50,7 +51,13 @@
             <br><br>
             <label for="Tratamientos">Tratamientos</label>
             <select class="select" id="Tratamientos" name="Tratamientos">
-                <option value="">Seleccionar…</option>
+                <option value="">Seleccionar...</option>
+            @forelse($tratamientos as $tratamiento)
+                <option>{{ $tratamiento->Nombre }}</option>
+            @empty
+                <option disabled>No hay tratamientos</option>
+            @endforelse
+
             </select>
             <br><br>
             <table id="clinicas">
@@ -78,7 +85,7 @@
             </table>
             <br><br>
             <label for="Estado">Estado</label>
-            <select class="select" id="Estado" name="Estado">
+            <select class="select" id="Estado" name="Estado_Cita">
                 <option>{{ $agenda->Estado_Cita }}</option>
                 <option>Confirmado</option>
                 <option>Declinado</option>
