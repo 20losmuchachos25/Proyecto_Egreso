@@ -29,7 +29,7 @@ class LoginController extends Controller
                     session(['Documento' => $credentials['Documento']]);
                     return redirect()->route('RegistroAgenda');
                 case 'Funcionario':
-                    return redirect()->route('Welcome');
+                    return redirect()->route('Desarrollo');
                 case 'Administrativo':
                     return redirect()->route('Welcome');
                 default:

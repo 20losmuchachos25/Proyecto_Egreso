@@ -19,7 +19,7 @@ class AgendaController extends Controller
     }
 
     public function BuscarAgendas(){
-        
+        // Todas las agendas de una misma persona
     }
 
     public function Registrar_Agenda(Request $request)
@@ -43,6 +43,11 @@ class AgendaController extends Controller
 
     public function Buscar_Agenda(Request $request)
     {
+        $id = $request->query('id');
+
+        $agenda = Agenda::with('usuario')->findOrFail($id);
         
+        
+        return view('DetalleAgenda', compact('agenda'));
     }
 }
