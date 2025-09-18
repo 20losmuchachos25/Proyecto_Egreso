@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 
 class LoginAuthController extends Controller{
-    public function LogIn(){
-
+    public function LogIn(Request $request){
+        $credenciales = $request->validate([
+            'Documento' => 'required|integer',
+            'Password' => 'required|string',
+        ]);
     }
 }
