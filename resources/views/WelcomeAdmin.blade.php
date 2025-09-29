@@ -14,21 +14,26 @@
     </header>
     <div class="container">
         <div class="column-left">
-            <form action="{{ route('verRegistro') }}">
+            <form action="{{ route('verRegistro') }}" method="GET">
+                @csrf
                 <input type="submit" value="Registro de Usuarios">
             </form>
             <br>
             <form action="{{ route('verGestor') }}">
+                @csrf
                 <input type="submit" value="Gestionar Usuarios">
             </form>
             <br>
             <form action="{{ route('Agenda') }}">
+                @csrf
                 <input type="submit" value="Agenda">
             </form>
             <br>
-            <form action="{{ route('verLogin') }}">
-                <input type="submit" value="Cerrar Sesion">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <input type="submit" value="Cerrar Sesión">
             </form>
+
         </div>
         <div class="column-right">
         </div>

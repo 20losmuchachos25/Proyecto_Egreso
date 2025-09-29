@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
+    use Notifiable;
+
+
     protected $table = 'usuario';   // Nombre de la tabla
     protected $primaryKey = 'Documento'; // Clave primaria
     public $incrementing = false;        // Porque Documento no es auto-incremental
@@ -15,6 +20,11 @@ class Usuario extends Model
         'Documento', 'Tipo_Documento', 'Primer_Nombre', 'Segundo_Nombre',
         'Primer_Apellido', 'Segundo_Apellido', 'Edad', 'Fecha_Nacimiento',
         'Sexo', 'Mutualista', 'Estado', 'Celular', 'Email', 'Password',   
+    ];
+
+    protected $hidden = [
+        'Password', // 🔹 Oculta la contraseña cuando retornás el modelo
+        'remember_token',
     ];
 
     protected $attributes = [
