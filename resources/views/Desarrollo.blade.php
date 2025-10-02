@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,8 +13,9 @@
         ?>
     </p>
     <br>
-    <form action="{{ route('verLogin') }}">
-        <input type="submit" value="Cerrar Sesion">
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <input type="submit" value="Cerrar Sesión">
     </form>
 </body>
 </html>

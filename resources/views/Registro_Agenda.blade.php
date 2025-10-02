@@ -12,8 +12,9 @@
     </header>
     <div class="container">
         <div class="column-left">
-            <form action="{{ route('verLogin') }}">
-                <input type="submit" value="Cerrar Sesion">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <input type="submit" value="Cerrar Sesión">
             </form>
         </div>
         <div class="column-right">
