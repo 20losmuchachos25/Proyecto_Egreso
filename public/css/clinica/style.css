@@ -1,0 +1,33 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+header {
+    display: flex;           /* organiza en fila */
+    align-items: center;     /* centra verticalmente */
+    justify-content: flex-start; /* asegura que todo arranque a la izquierda */
+    /*background-color: #ecfeff;*/
+}
+h2{
+    margin: 0 auto;       /* centra horizontalmente */
+    text-align: center;
+}
+.logo {
+    width: 200px;   /* tamaño del logo */
+    height: auto;  /* mantiene proporción */
+    margin-right: 15px; /* separa del texto */
+}
+.container {
+    display: flex;
+    height: 100vh;
+}
+.column-left {
+    flex: 0 0 20%;
+    padding: 20px;
+    display: flex;
+    align-items: center;  
+}
+.column-right {
+    flex: 1;
+    padding: 20px;
+}

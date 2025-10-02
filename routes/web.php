@@ -8,9 +8,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\WelocomeAdminController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\ClinicaController;
 
 // Ruta Principal
 Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Principal');
+Route::get('/Clinica', [ClinicaController::class, 'ViewClinica'])->name('Clinica');
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {

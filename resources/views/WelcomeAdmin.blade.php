@@ -29,6 +29,11 @@
                 <input type="submit" value="Agenda">
             </form>
             <br>
+            <form action="{{ route('Clinicas') }}">
+                @csrf
+                <input type="submit" value="Clinicas">
+            </form>
+            <br>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <input type="submit" value="Cerrar Sesión">
