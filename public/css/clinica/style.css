@@ -1,6 +1,7 @@
 body {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
+    
 }
 header {
     display: flex;           /* organiza en fila */
@@ -22,7 +23,7 @@ h2{
     height: 100vh;
 }
 .column-left {
-    flex: 0 0 20%;
+    flex: 0 0 10%;
     padding: 20px;
     display: flex;
     align-items: center;  
