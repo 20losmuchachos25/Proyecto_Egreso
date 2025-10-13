@@ -54,6 +54,7 @@
                     <th>Numero</th>
                     <th>Esquina</th>
                     <th>Referencia</th>
+                    <th>Opciones</th>
                 </thead>
                 <tbody>
                     @forelse($clinicas as $clinica)
@@ -81,7 +82,7 @@
                             <td>
                                 <button><i class="fa-solid fa-clock"></i> Horario</button>
                                 <button><i class="fa-solid fa-flask"></i> Especialización</button>
-                                <button onclick="AbrirTelefonoModal('{{ $clinica->ID_Clinica }}')"><i class="fa-solid fa-phone"></i> Teléfono</button></td>
+                                <button class="telefono-btn" onclick="event.stopPropagation(); AbrirTelefonoModal('{{ $clinica->ID_Clinica }}')"><i class="fa-solid fa-phone"></i> Teléfono</button></td>
                         </tr>
                     @empty
                         <tr>
@@ -155,12 +156,19 @@
             <div class="modal-content">
                 <span class="close3">&times;</span>
                 <h3>Clinica - Teléfono</h3>
-                <form action="" method="post">
+                <form action="{{ route('AltaTelefono') }}" method="post">
+                    @csrf
                     <input type="hidden" id="IDOculto" name="IDOculto">
+                    <label for="Telefono">Telefono: </label>
+                    <input type="text" id="Telefono" name="Telefono" required>
+
+                    <input type="submit" value="Agregar">
                 </form>
+                <br>
                     <table id="telefonos">
                         <thead>
                             <th>Teléfonos</th>
+                            <th>Opciones</th>
                         </thead>
                         <tbody>
                             
@@ -176,6 +184,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/abrirregistroClinica.js') }}"></script>
     <script src="{{ asset('js/abrireditorClinica.js') }}"></script>
+    <script src="{{ asset('js/abrirregistroTelefono.js') }}"></script>
+
 
 
 </body>

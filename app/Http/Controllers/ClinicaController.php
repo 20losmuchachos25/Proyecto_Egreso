@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Clinica;
+use App\Models\Telefono_Clinica;
+
 
 class ClinicaController extends Controller
 {
@@ -57,6 +59,39 @@ class ClinicaController extends Controller
 
         } else {
             return back()->with('error', 'Problemas al editar clinica.');
+
+        }
+
+    }
+
+    public function ObtenerTelefonos($id){
+        $telefonos = Telefono_Clinica::where('ID_Clinica', $id)->get();
+        return response()->json($telefonos);
+    }
+
+    public function AgregarTelefono(Request $request){
+        $request->validate([
+            'IDOculto' => 'required|integer',
+            'Telefono' => 'required|min:6'
+        ]);
+        $telefono = $request->Telefono;
+
+        $validar = Telefono_Clinica::where('Telefono', $telefono)->exists();
+
+        if($validar){
+            return back()->with('success', 'Teléfono repetido. No se puede agregar');
+        }else{
+            $operacion = Telefono_Clinica::create([
+                'ID_Clinica' => $request->IDOculto,
+                'Telefono' => $telefono
+            ]);
+
+            if($operacion){
+                return back()->with('success', 'Telefono agregado correctamente.');
+            }
+            else{
+                return back()->with('error', 'Problemas al agregar telefono.');
+            }
 
         }
 

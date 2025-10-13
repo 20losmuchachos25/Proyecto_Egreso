@@ -15,6 +15,10 @@ Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Princ
 Route::get('/Clinica', [ClinicaController::class, 'ViewClinica'])->name('Clinica');
 Route::post('/Clinica/Alta', [ClinicaController::class, 'AgregarClinica'])->name('AltaClinica');
 Route::post('/Clinica/Editar', [ClinicaController::class, 'EditarClinica'])->name('EditarClinica');
+Route::get('/clinicas/{id}/telefonos', [ClinicaController::class, 'ObtenerTelefonos']);
+Route::post('/Clinica/AltaTel', [ClinicaController::class, 'AgregarTelefono'])->name('AltaTelefono');
+
+
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {

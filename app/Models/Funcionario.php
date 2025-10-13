@@ -14,6 +14,6 @@ class Funcionario extends Model
 
 
     protected $fillable = [
-        'Documento_Funcionario',   
+        'Documento_Funcionario'
     ];
 }
