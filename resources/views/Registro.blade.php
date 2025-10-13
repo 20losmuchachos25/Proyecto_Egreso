@@ -28,7 +28,7 @@
                 <div style="color: red;">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <p>{{ $error }}</p>
                         @endforeach
                     </ul>
                 </div>
@@ -41,7 +41,6 @@
                 </div>
             @endif
 
-            <form action="{{ route('NuevoUsuario') }}" method="POST">
             <form id="registroForm" action="{{ route('NuevoUsuario') }}" method="POST">
                 @csrf
                 <div class="grid">

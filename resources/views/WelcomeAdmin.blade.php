@@ -29,9 +29,9 @@
                 <input type="submit" value="Agenda">
             </form>
             <br>
-            <form action="{{ route('Clinicas') }}">
+            <form action="{{ route('Clinica') }}">
                 @csrf
-                <input type="submit" value="Clinicas">
+                <input type="submit" value="Clinica">
             </form>
             <br>
             <form action="{{ route('logout') }}" method="POST">
