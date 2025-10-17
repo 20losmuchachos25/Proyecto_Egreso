@@ -96,4 +96,33 @@ class ClinicaController extends Controller
         }
 
     }
+    public function EliminarTelefono(Request $request){
+        $request->validate([
+            'IDOculto' => 'required|integer',
+            'Telefono' => 'required'
+        ]);
+        $telefono = $request->Telefono;
+        $ID_Clinica = $request->IDOculto;
+
+        $validar = Telefono_Clinica::where('Telefono', $telefono)->where('ID_Clinica', $ID_Clinica)->delete();
+
+        if($validar){
+            if ($validar) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Teléfono eliminado correctamente.'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se pudo eliminar el teléfono.'
+            ]);
+        }
+        }else{
+             return response()->json([
+            'success' => false,
+            'message' => 'Teléfono no encontrado.'
+        ]);
+        }
+    }
 }

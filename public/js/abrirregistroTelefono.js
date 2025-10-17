@@ -62,6 +62,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-function EditarTelefono(ID){
+function EditarTelefono(telefono){
+    const idClinica = document.getElementById("IDOculto").value;
+
+    if (!confirm(`¿Estás seguro que querés eliminar el teléfono ${telefono}?`)) {
+        return;
+    }  
+    
+    fetch('/Clinica/${idClinica}/Telefono/${}')
     
 }
