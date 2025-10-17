@@ -69,6 +69,12 @@ function EditarTelefono(telefono){
         return;
     }  
     
-    fetch('/Clinica/${idClinica}/Telefono/${}')
+    fetch('/Clinica/${idClinica}/Telefono/${telefono}',{
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        }
+    })
+
     
 }
