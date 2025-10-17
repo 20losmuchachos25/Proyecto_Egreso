@@ -60,4 +60,22 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "none";
     });
 
+
 });
+
+function EditarTelefono(telefono){
+    const idClinica = document.getElementById("IDOculto").value;
+
+    if (!confirm(`¿Estás seguro que querés eliminar el teléfono ${telefono}?`)) {
+        return;
+    }  
+    
+    fetch('/Clinica/${idClinica}/Telefono/${telefono}',{
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        }
+    })
+
+    
+}

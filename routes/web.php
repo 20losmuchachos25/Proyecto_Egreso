@@ -17,6 +17,7 @@ Route::post('/Clinica/Alta', [ClinicaController::class, 'AgregarClinica'])->name
 Route::post('/Clinica/Editar', [ClinicaController::class, 'EditarClinica'])->name('EditarClinica');
 Route::get('/clinicas/{id}/telefonos', [ClinicaController::class, 'ObtenerTelefonos']);
 Route::post('/Clinica/AltaTel', [ClinicaController::class, 'AgregarTelefono'])->name('AltaTelefono');
+Route::delete('/Clinica/{id}/Telefono/{telefono}', [ClinicaController::class, 'EliminarTelefono'])->name('BajaTelefono');
 
 
 
