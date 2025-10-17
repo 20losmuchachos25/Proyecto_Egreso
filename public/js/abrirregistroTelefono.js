@@ -23,7 +23,7 @@ function AbrirTelefonoModal(ID){
                     btnEditar.textContent = "✏️ Editar";
                     btnEditar.classList.add("editar-btn");
                     btnEditar.addEventListener("click", () => {
-                        EditarTelefono(tel.Telefono);
+                        EditarTelefono(tel.Telefono, ID);
                     });
 
                     const btnEliminar = document.createElement("button");
@@ -61,7 +61,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
-
-function EditarTelefono(ID){
-    
-}

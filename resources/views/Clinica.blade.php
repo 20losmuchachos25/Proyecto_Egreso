@@ -24,9 +24,8 @@
             </div>
             <div class="column-right">
                 <button onclick="AbrirGestor()"><i class="fa-solid fa-plus"></i> Agregar</button>
-                <button><i class="fa-solid fa-minus"></i> Quitar</button>
+                <button><i class="fa-solid fa-minus"></i> Desactivar</button>
                 <button><i class="fa-solid fa-pen"></i> Editar</button>
-                <button><i class="fa-solid fa-trash"></i> Eliminar</button>
 
                 {{-- Mensajes de validación --}}
             @if ($errors->any())
@@ -178,6 +177,24 @@
             </div>
         </div>
 
+        <div id="TelEditarModal" class="modal">
+            <div class="modal-content">
+                <span class="close4">&times;</span>
+                <h3>Telefono - Editar</h3>
+                <form action="" method="post">
+                    @csrf
+                    <input type="hidden" id="IDOculto2" name="IDOculto2">
+                    <input type="hidden" id="TelOculto" name="TelOculto">
+
+                    <label for="TelefonoEdit">Telefono: </label>
+                    <input type="text" id="TelefonoEdit" name="TelefonoEdit" required>
+
+                    <input type="submit" value="Editar">
+                    <button onclick="CancelarEditar()">Cancelar</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -185,6 +202,8 @@
     <script src="{{ asset('js/abrirregistroClinica.js') }}"></script>
     <script src="{{ asset('js/abrireditorClinica.js') }}"></script>
     <script src="{{ asset('js/abrirregistroTelefono.js') }}"></script>
+    <script src="{{ asset('js/abrireditarTelefono.js') }}"></script>
+
 
 
 
