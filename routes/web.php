@@ -15,9 +15,28 @@ Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Princ
 Route::get('/Clinica', [ClinicaController::class, 'ViewClinica'])->name('Clinica');
 Route::post('/Clinica/Alta', [ClinicaController::class, 'AgregarClinica'])->name('AltaClinica');
 Route::post('/Clinica/Editar', [ClinicaController::class, 'EditarClinica'])->name('EditarClinica');
+// Teléfonos Clinica
 Route::get('/clinicas/{id}/telefonos', [ClinicaController::class, 'ObtenerTelefonos']);
 Route::post('/Clinica/AltaTel', [ClinicaController::class, 'AgregarTelefono'])->name('AltaTelefono');
 Route::delete('/Clinica/{id}/Telefono/{telefono}', [ClinicaController::class, 'EliminarTelefono'])->name('BajaTelefono');
+Route::post('/Clinica/Telefono/Editar', [ClinicaController::class, 'EditarTelefono'])->name('EditarTelefono');
+// Especializaciones Clinica
+Route::get('/clinicas/{id}/especializaciones', [ClinicaController::class, 'ObtenerEspecializaciones']);
+Route::get('/clinica/especializaciones/json', function () { 
+    $path = storage_path('app/data/especializaciones.json'); 
+    $json = file_get_contents($path);
+    return response()->json(json_decode($json, true));
+});
+Route::post('clinica/especializacion/Alta', [ClinicaController::class, 'AgregarEspecializacion'])->name('AltaEspecializacion');
+Route::delete('/clinica/{id}/Especializacion/{telefono}', [ClinicaController::class, 'EliminarEspecializacion'])->name('BajaEspecializacion');
+//Horario Clinica
+Route::get('/clinicas/{id}/horarios', [ClinicaController::class, 'ObtenerHorarios']);
+Route::post('/clinicas/horario/Alta', [ClinicaController::class, 'AgregarHorario'])->name('AltaHorario');
+
+
+
+
+
 
 
 

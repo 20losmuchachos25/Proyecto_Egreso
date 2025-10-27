@@ -63,19 +63,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-function EditarTelefono(telefono){
+function EliminarTelefono(telefono) {
     const idClinica = document.getElementById("IDOculto").value;
 
+    // Confirmación antes de eliminar
     if (!confirm(`¿Estás seguro que querés eliminar el teléfono ${telefono}?`)) {
         return;
-    }  
-    
-    fetch('/Clinica/${idClinica}/Telefono/${telefono}',{
+    }
+
+    fetch(`/Clinica/${idClinica}/Telefono/${telefono}`, {
         method: 'DELETE',
         headers: {
+            'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+            IDOculto: idClinica,
+            Telefono: telefono
+        })
+    })
+    .then(response => {
+        // Verificar si la respuesta es correcta antes de convertirla a JSON
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            AbrirTelefonoModal(idClinica); 
+        } else {
+            alert(data.message || 'No se pudo eliminar el teléfono.');
         }
     })
-
-    
+    .catch(error => {
+        console.error('Error al eliminar:', error);
+        alert('Ocurrió un error al intentar eliminar el teléfono.');
+    });
 }
+

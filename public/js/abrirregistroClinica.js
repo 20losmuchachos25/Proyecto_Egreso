@@ -2,8 +2,6 @@ function AbrirGestor(){
     const modal = document.getElementById("RegistroModal");
 
     modal.style.display = "block";
-
-
 }
 document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("RegistroModal");

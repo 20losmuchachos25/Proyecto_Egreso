@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ asset('css/tables/table.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="ruta-alta-horario" content="{{ route('AltaHorario') }}">
+
 
 </head>
 <body>
@@ -39,11 +41,31 @@
             @endif
 
             {{-- Mensaje de éxito --}}
-            @if(session('success'))
-                <div style="color: green;">
-                    {{ session('success') }}
-                </div>
+            @if (session('success'))
+                <div style="color: green;">{{ session('success') }}</div>
             @endif
+            @if (session('abrir_modal'))
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const id = Number("{{ session('abrir_modal') }}");
+                        if (!isNaN(id)) {
+                            AbrirTelefonoModal(id);
+                        }
+                    });
+                </script>
+            @endif
+            @if (session('abrir_modal_especializacion'))
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const id = Number("{{ session('abrir_modal_especializacion') }}");
+                        if (!isNaN(id)) {
+                            ListarEspecializaciones(id);
+                        }
+                    });
+                </script>
+            @endif
+
+            
             <br>
             <br>
             <table id="clinicas">
@@ -79,8 +101,8 @@
                             <td>{{ $esquina }}</td>
                             <td>{{ $referencia }}</td>
                             <td>
-                                <button><i class="fa-solid fa-clock"></i> Horario</button>
-                                <button><i class="fa-solid fa-flask"></i> Especialización</button>
+                                <button class="horario-btn" onclick="event.stopPropagation(); ListarHorarios('{{ $clinica->ID_Clinica }}')"><i class="fa-solid fa-clock"></i> Horario</button>
+                                <button class="especializacion-btn" onclick="event.stopPropagation(); ListarEspecializaciones('{{ $clinica->ID_Clinica }}')"><i class="fa-solid fa-flask"></i> Especialización</button>
                                 <button class="telefono-btn" onclick="event.stopPropagation(); AbrirTelefonoModal('{{ $clinica->ID_Clinica }}')"><i class="fa-solid fa-phone"></i> Teléfono</button></td>
                         </tr>
                     @empty
@@ -181,17 +203,104 @@
             <div class="modal-content">
                 <span class="close4">&times;</span>
                 <h3>Telefono - Editar</h3>
-                <form action="" method="post">
+                <form action="{{ route('EditarTelefono') }}" method="post">
                     @csrf
                     <input type="hidden" id="IDOculto2" name="IDOculto2">
                     <input type="hidden" id="TelOculto" name="TelOculto">
 
+
                     <label for="TelefonoEdit">Telefono: </label>
                     <input type="text" id="TelefonoEdit" name="TelefonoEdit" required>
-
+                    <br>
+                    <br>
                     <input type="submit" value="Editar">
-                    <button onclick="CancelarEditar()">Cancelar</button>
                 </form>
+                <br>
+                <button onclick="CancelarEditar()">Cancelar</button>
+
+            </div>
+        </div>
+
+        <div id="EspecializacionModal" class="modal">
+            <div class="modal-content">
+                <span class="close5">&times;</span>
+                <h3>Clinica - Especialización</h3>
+                <form action="{{ route('AltaEspecializacion') }}" method="post">
+                    @csrf
+                    <input type="hidden" id="IDOculto3" name="IDOculto3">
+                    <select class="select" id="Especializacion" name="Especializacion">
+
+                    </select>
+
+                    <input type="submit" value="Agregar">
+                </form>
+                <br>
+                    <table id="especializaciones">
+                        <thead>
+                            <th>Especialización</th>
+                            <th>Opciones</th>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <div id="HorarioModal" class="modal">
+            <div class="modal-content">
+                <span class="close6">&times;</span>
+                <h3>Clinica - Horario</h3>
+                <form action="{{ route('AltaHorario') }}" method="post">
+                    @csrf
+                    <input type="hidden" id="IDOculto4" name="IDOculto4">
+                    <input type="checkbox" id="Lunes" name="dias[]" value="Lunes">
+                    <label for="Lunes">Lunes</label>
+
+                    <input type="checkbox" id="Martes" name="dias[]" value="Martes">
+                    <label for="Martes">Martes</label>
+
+                    <input type="checkbox" id="Miercoles" name="dias[]" value="Miércoles">
+                    <label for="Miercoles">Miércoles</label>
+
+                    <input type="checkbox" id="Jueves" name="dias[]" value="Jueves">
+                    <label for="Jueves">Jueves</label>
+
+                    <br>
+
+                    <input type="checkbox" id="Viernes" name="dias[]" value="Viernes">
+                    <label for="Viernes">Viernes</label>
+
+                    <input type="checkbox" id="Sabado" name="dias[]" value="Sábado">
+                    <label for="Sabado">Sábado</label>
+
+                    <input type="checkbox" id="Domingo" name="dias[]" value="Domingo">
+                    <label for="Domingo">Domingo</label>
+                    <br>
+                    <br>
+
+                    <label for="Apertura">Apertura </label>
+                    <input type="time" id="Apertura" name="Apertura"> 
+
+                    <label for="Cierre">Cierre </label>
+                    <input type="time" id="Cierre" name="Cierre"> 
+                </form>
+                <br>
+                <button onclick="AgregarHorario()">Agregar</button>
+                <br>
+                <br>
+                    <table id="horarios">
+                        <thead>
+                            <th>Día</th>
+                            <th>Apertura</th>
+                            <th>Cierre</th>
+                            <th>Opciones</th>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
             </div>
         </div>
 
@@ -203,6 +312,10 @@
     <script src="{{ asset('js/abrireditorClinica.js') }}"></script>
     <script src="{{ asset('js/abrirregistroTelefono.js') }}"></script>
     <script src="{{ asset('js/abrireditarTelefono.js') }}"></script>
+    <script src="{{ asset('js/especializacion-panel.js') }}"></script>
+    <script src="{{ asset('js/horario-panel.js') }}"></script>
+
+
 
 
 

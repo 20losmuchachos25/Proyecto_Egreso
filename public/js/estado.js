@@ -26,7 +26,7 @@ function deshabilitarInput(id) {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
-        body: JSON.stringify({
+        body: JSON.stringify({ 
             id: documento,
             dato: idInput
         })

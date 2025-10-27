@@ -18,3 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+function CancelarEditar(){
+    const modal = document.getElementById("TelEditarModal");
+    modal.style.display = "none";
+
+        document.getElementById("IDOculto2").value = "";
+        document.getElementById("TelOculto").value = "";
+
+        document.getElementById("TelefonoEdit").value = "";
+
+
+}
