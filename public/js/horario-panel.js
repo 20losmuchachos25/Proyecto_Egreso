@@ -107,7 +107,14 @@ function AgregarHorario(){
                     document.getElementById("Apertura").value = '';
                     document.getElementById("Cierre").value = '';
                 } else {
-                    console.error('No se logró agregar el horario para:', cb.value);
+                    alert('No se logró agregar el horario para: ' + cb.value);
+                    // Limpiar los checkboxes
+                    const checkboxes = document.querySelectorAll('input[name="dias[]"]');
+                    checkboxes.forEach(cb => cb.checked = false);
+
+                    // Limpiar los inputs de hora
+                    document.getElementById("Apertura").value = '';
+                    document.getElementById("Cierre").value = '';
                 }
             })
             .catch(error => console.error('Error al consultar el dato en la base de datos', error));

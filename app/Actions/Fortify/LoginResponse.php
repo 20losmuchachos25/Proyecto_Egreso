@@ -13,10 +13,16 @@ class LoginResponse implements LoginResponseContract
 
         switch ($user->tipo_usuario) {
             case 'Cliente':
+                session(['Documento' => $user->Documento]);
+                session(['rol' => $user->tipo_usuario]);
                 return redirect()->route('RegistroAgenda');
             case 'Funcionario':
+                session(['Documento' => $user->Documento]);
+                session(['rol' => $user->tipo_usuario]);
                 return redirect()->route('Desarrollo');
             case 'Administrativo':
+                session(['Documento' => $user->Documento]);
+                session(['rol' => $user->tipo_usuario]);
                 return redirect()->route('Welcome');
             default:
                 return redirect()->route('dashboard'); // fallback

@@ -62,31 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const rol = celdas[13].innerText;
 
-                botonCliente.style.transform = "";
-                botonCliente.style.boxShadow = "";
-                botonCliente.style.backgroundColor = "";
-                botonFuncionario.style.transform = "";
-                botonFuncionario.style.boxShadow = "";
-                botonFuncionario.style.backgroundColor = "";
-                botonAdministrativo.style.transform = "";
-                botonAdministrativo.style.boxShadow = "";
-                botonAdministrativo.style.backgroundColor = "";
-
-
-                if (rol === "Cliente") {
-                    botonCliente.style.transform = "scale(1.1)";
-                    botonCliente.style.boxShadow = "0 0 10px #3498db";
-                    botonCliente.style.backgroundColor ="#138496";
-                } else if (rol === "Funcionario") {
-                    botonFuncionario.style.transform = "scale(1.1)";
-                    botonFuncionario.style.boxShadow = "0 0 10px #3498db";
-                    botonFuncionario.style.backgroundColor = "#138496";
-                } else if (rol === "Administrativo") {
-                    botonAdministrativo.style.transform = "scale(1.1)";
-                    botonAdministrativo.style.boxShadow = "0 0 10px #3498db";
-                    botonAdministrativo.style.backgroundColor = "#138496";
-                }
-
                 modal.style.display = "block";
             });
         }

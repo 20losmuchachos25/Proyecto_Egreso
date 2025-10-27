@@ -81,11 +81,6 @@
                 </div>
                 <br>
                 <div class="field">
-                <label class="label" for="Edad">Edad</label>
-                <input class="input" type="number" id="Edad" name="Edad" />
-                </div>
-                <br>
-                <div class="field">
                 <label class="label" for="Fecha_Nacimiento">Fecha de nacimiento</label>
                 <input class="input" type="date" id="Fecha_Nacimiento" name="Fecha_Nacimiento" />
                 </div>

@@ -27,7 +27,6 @@
             <div class="column-right">
                 <button onclick="AbrirGestor()"><i class="fa-solid fa-plus"></i> Agregar</button>
                 <button><i class="fa-solid fa-minus"></i> Desactivar</button>
-                <button><i class="fa-solid fa-pen"></i> Editar</button>
 
                 {{-- Mensajes de validación --}}
             @if ($errors->any())
@@ -123,7 +122,7 @@
                     @csrf
                     <section id="Calle">
                         <label for="Calle">Calle: </label>
-                        <input type="text" id="Calle" name="Calle" placeholder="Ingrese calle.">
+                        <input type="text" id="Calle" name="Calle" placeholder="Ingrese calle." onkeypress="soloLetras(event)">
                     </section>
                     <section id="Numero">
                         <label for="Numero">Numero de Puerta: </label>
@@ -131,11 +130,11 @@
                     </section>
                     <section id="Esquina">
                         <label for="Esquina">Esquina: </label>
-                        <input type="text" id="Esquina" name="Esquina" placeholder="Ingrese esquina.">
+                        <input type="text" id="Esquina" name="Esquina" placeholder="Ingrese esquina." onkeypress="soloLetras(event)">
                     </section>
                     <section id="Referencia">
                         <label for="Referencia">Referencia: </label>
-                        <input type="text" id="Referencia" name="Referencia" placeholder="Ingrese referencia.">
+                        <input type="text" id="Referencia" name="Referencia" placeholder="Ingrese referencia." onkeypress="soloLetras(event)">
                     </section>
 
                     <input type="submit" value="Enviar">
@@ -154,7 +153,7 @@
                     </section>
                     <section id="calle">
                         <label for="Calle">Calle: </label>
-                        <input type="text" id="Calle2" name="Calle">
+                        <input type="text" id="Calle2" name="Calle" onkeypress="soloLetras(event)">
                     </section>
                     <section id="numero">
                         <label for="Numero">Numero de Puerta: </label>
@@ -162,11 +161,11 @@
                     </section>
                     <section id="esquina">
                         <label for="Esquina">Esquina: </label>
-                        <input type="text" id="Esquina2" name="Esquina">
+                        <input type="text" id="Esquina2" name="Esquina" onkeypress="soloLetras(event)">
                     </section>
                     <section id="referencia">
                         <label for="Referencia">Referencia: </label>
-                        <input type="text" id="Referencia2" name="Referencia">
+                        <input type="text" id="Referencia2" name="Referencia" onkeypress="soloLetras(event)">
                     </section>
 
                     <input type="submit" value="Enviar">
@@ -181,7 +180,7 @@
                     @csrf
                     <input type="hidden" id="IDOculto" name="IDOculto">
                     <label for="Telefono">Telefono: </label>
-                    <input type="text" id="Telefono" name="Telefono" required>
+                    <input type="text" id="Telefono" name="Telefono" onkeypress="soloNumeros(event)" maxlength="9" required>
 
                     <input type="submit" value="Agregar">
                 </form>
@@ -210,7 +209,7 @@
 
 
                     <label for="TelefonoEdit">Telefono: </label>
-                    <input type="text" id="TelefonoEdit" name="TelefonoEdit" required>
+                    <input type="text" id="TelefonoEdit" name="TelefonoEdit" onkeypress="soloNumeros(event)" maxlength="9" required>
                     <br>
                     <br>
                     <input type="submit" value="Editar">
@@ -225,7 +224,7 @@
             <div class="modal-content">
                 <span class="close5">&times;</span>
                 <h3>Clinica - Especialización</h3>
-                <form action="{{ route('AltaEspecializacion') }}" method="post">
+                <form action="{{ route('AltaEspecializacion') }}" method="post" id="Especial">
                     @csrf
                     <input type="hidden" id="IDOculto3" name="IDOculto3">
                     <select class="select" id="Especializacion" name="Especializacion">
@@ -234,6 +233,22 @@
 
                     <input type="submit" value="Agregar">
                 </form>
+
+                <script>
+                    document.getElementById("Especial").addEventListener("submit", function(event) {
+                        event.preventDefault(); // 🔹 Detiene el envío del formulario
+
+                        const esp = document.getElementById("Especializacion").value.trim();
+
+                        if (esp === "") {
+                            alert("Por favor, selecciona una especialización.");
+                            return;
+                        }
+
+                        // Si pasa la validación, se envía el formulario
+                        this.submit();
+                    });
+                </script>
                 <br>
                     <table id="especializaciones">
                         <thead>
@@ -314,11 +329,7 @@
     <script src="{{ asset('js/abrireditarTelefono.js') }}"></script>
     <script src="{{ asset('js/especializacion-panel.js') }}"></script>
     <script src="{{ asset('js/horario-panel.js') }}"></script>
-
-
-
-
-
+    <script src="{{ asset('js/validar.js') }}"></script>
 
 </body>
 </html>

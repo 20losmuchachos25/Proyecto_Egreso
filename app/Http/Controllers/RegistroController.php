@@ -25,7 +25,6 @@ class RegistroController extends Controller
             'Segundo_Nombre'   => 'nullable|min:3',
             'Primer_Apellido'  => 'required|min:3',
             'Segundo_Apellido' => 'nullable|min:3',
-            'Edad'             => 'required|integer|min:0',
             'Fecha_Nacimiento' => 'required|date',
             'Sexo' => 'required|in:Masculino,Femenino,X',
             'Rol'              => 'required|string|max:50',
@@ -36,6 +35,11 @@ class RegistroController extends Controller
 
         $datos = $request->all();
         $datos['Password'] = bcrypt($datos['Documento']); // Encriptar la contraseña
+
+        // Calcular edad a partir de la fecha de nacimiento enviada
+        $nacimiento = new \DateTime($datos['Fecha_Nacimiento']);
+        $hoy = new \DateTime();
+        $datos['Edad'] = $hoy->diff($nacimiento)->y;
 
         $rol = $datos['Rol'];
 

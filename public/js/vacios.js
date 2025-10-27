@@ -8,13 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const documento = document.getElementById('Documento').value.trim();
         const primerNombre = document.getElementById('Primer_Nombre').value.trim();
         const primerApellido = document.getElementById('Primer_Apellido').value.trim();
-        const edad = document.getElementById('Edad').value.trim();
         const email = document.getElementById('Email').value.trim();
         const mutualista = document.getElementById('Mutualista').value;
         const rol = document.getElementById('Rol').value;
         const sexo = document.querySelector('input[name="Sexo"]:checked');
 
-        if (!documento || !primerNombre || !primerApellido || !edad || !email) {
+        if (!documento || !primerNombre || !primerApellido || !email) {
             alert("Por favor, complete todos los campos de texto obligatorios.");
             return;
         }

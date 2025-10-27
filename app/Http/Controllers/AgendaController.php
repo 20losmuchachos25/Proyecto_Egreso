@@ -22,8 +22,7 @@ class AgendaController extends Controller
         // Todas las agendas de una misma persona
     }
 
-    public function Registrar_Agenda(Request $request)
-    {
+    public function Registrar_Agenda(Request $request){
         $request->validate([
             'Fecha' => 'required|date',
             'Hora' => 'required|date_format:H:i',
@@ -41,8 +40,7 @@ class AgendaController extends Controller
         }   
     }
 
-    public function Buscar_Agenda(Request $request)
-    {
+    public function Buscar_Agenda(Request $request){
         $id = $request->query('id');
 
         $agenda = Agenda::with('usuario')->findOrFail($id);
@@ -51,8 +49,7 @@ class AgendaController extends Controller
         return view('DetalleAgenda', compact('agenda','tratamientos'));
     }
 
-    public function Modificar_Agenda(Request $request)
-    {
+    public function Modificar_Agenda(Request $request){
         $request->validate([
             'id' => 'required|integer',
             'Motivo' => 'required|string',

@@ -187,11 +187,6 @@
                                         <button type="button" onclick="ModificarInput(document.getElementById('Email'))"><i class="fas fa-check"></i></button>
                                         <button type="button" onclick="deshabilitarInput(document.getElementById('Email'))"><i class="fas fa-times"></i></button>
                                     </section>
-                            
-
-                                        <button type="button" id="Cliente" value="Cliente" onclick="CambiarRol(this)">Cliente</button>
-                                        <button type="button" id="Funcionario" value="Funcionario" onclick="CambiarRol(this)">Funcionario</button>
-                                        <button type="button" id="Administrativo" value="Administrativo" onclick="CambiarRol(this)">Administrativo</button>
 
                                 </form> 
                                 <br>
