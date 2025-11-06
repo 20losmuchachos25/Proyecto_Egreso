@@ -1,0 +1,59 @@
+services:
+  mysql1:
+    image: mysql:8.0
+    container_name: bd_clinica
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clinica
+    ports:
+      - "3307:3306"
+    volumes:
+      - C:\data_master:/var/lib/mysql
+    networks:
+      - red2
+    command: >
+      --server-id=1
+      --log-bin=mysql-bin
+      --gtid_mode=ON
+      --enforce-gtid-consistency=ON
+      --log_replica_updates=ON
+      --binlog_format=ROW
+
+  mysql2:
+    image: mysql:8.0
+    container_name: bd_clinica2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3308:3306"
+    volumes:
+      - C:\data_slave:/var/lib/mysql
+    networks:
+      - red2
+    command: >
+      --server-id=2
+      --relay-log=mysql-relay-bin
+      --gtid_mode=ON
+      --enforce-gtid-consistency=ON
+      --log_replica_updates=ON
+      --read-only=ON
+      --log-bin=mysql-bin
+      --binlog-format=row
+      --binlog-expire-logs-seconds=604800
+
+  proxysql:
+    image: proxysql/proxysql:latest
+    container_name: proxysql
+    ports:
+      - "6033:6033"  # Laravel se conecta por aca
+      - "6032:6032"  # Por aca nos conectamos para configurar
+    volumes:
+      - C:\proxysql:/var/lib/proxysql
+    networks:
+      - red2
+    restart: always
+
+
+networks:
+  red2:
+    driver: bridge

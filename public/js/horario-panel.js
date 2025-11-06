@@ -127,15 +127,15 @@ function AgregarHorario(){
     }
 }
 
-function EliminarHorario(especializacion) {
+function EliminarHorario(horario) {
     const idClinica = document.getElementById("IDOculto3").value;
 
     // Confirmación antes de eliminar
-    if (!confirm(`¿Estás seguro que querés eliminar la especialización ${especializacion}?`)) {
+    if (!confirm(`¿Estás seguro que querés eliminar el horario ${horario}?`)) {
         return;
     }
 
-    fetch(`/clinica/${idClinica}/Especializacion/${especializacion}`, {
+    fetch(`/clinica/${idClinica}/Especializacion/${horario}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ function EliminarHorario(especializacion) {
         },
         body: JSON.stringify({
             IDOculto3: idClinica,
-            Especializacion: especializacion
+            Especializacion: horario
         })
     })
     .then(response => {
@@ -156,13 +156,13 @@ function EliminarHorario(especializacion) {
     .then(data => {
         if (data.success) {
             alert(data.message);
-            ListarEspecializaciones(idClinica); 
+            ListarHorarios(idClinica); 
         } else {
-            alert(data.message || 'No se pudo eliminar la especialización.');
+            alert(data.message || 'No se pudo eliminar el horario.');
         }
     })
     .catch(error => {
         console.error('Error al eliminar:', error);
-        alert('Ocurrió un error al intentar eliminar la especialización.');
+        alert('Ocurrió un error al intentar eliminar el horario.');
     });
 }
