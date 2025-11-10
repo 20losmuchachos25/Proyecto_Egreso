@@ -33,7 +33,7 @@ function ListarHorarios(ID){
                     btnEliminar.textContent = "🗑️ Eliminar";
                     btnEliminar.classList.add("eliminar-btn");
                     btnEliminar.addEventListener("click", () => {
-                        EliminarHorario(hor.Dia);
+                        EliminarHorario(hor.Dia, hor.Hora_Apertura, hor.Hora_Cierre);
                     });
 
                     tdAcciones.appendChild(btnEliminar);
@@ -127,23 +127,25 @@ function AgregarHorario(){
     }
 }
 
-function EliminarHorario(horario) {
-    const idClinica = document.getElementById("IDOculto3").value;
+function EliminarHorario(dia, apertura, cierre) {
+    const idClinica = document.getElementById("IDOculto4").value;
 
     // Confirmación antes de eliminar
-    if (!confirm(`¿Estás seguro que querés eliminar el horario ${horario}?`)) {
+    if (!confirm(`¿Estás seguro que querés eliminar el horario ${dia}?`)) {
         return;
     }
 
-    fetch(`/clinica/${idClinica}/Especializacion/${horario}`, {
+    fetch(`/clinica/${idClinica}/${dia}/${apertura}/${cierre}/horario/Eliminar`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         },
         body: JSON.stringify({
-            IDOculto3: idClinica,
-            Especializacion: horario
+            IDOculto4: idClinica,
+            Dia: dia,
+            Apertura: apertura,
+            Cierre: cierre
         })
     })
     .then(response => {
