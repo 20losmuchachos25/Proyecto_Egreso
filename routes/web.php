@@ -29,7 +29,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/Gestor', [GestorController::class, 'index'])->name('verGestor');
     Route::post('/Gestor/consulta', [GestorController::class, 'ConsultaDato'])->name('ConsultaDato');
     Route::post('/Gestor/modificar', [GestorController::class, 'ModificarDato'])->name('ModificarDato');
-
     Route::get('/Desarrollo', [DesarrolloController::class, 'index'])->name('Desarrollo');
 
     Route::get('/WelcomeAdmin', [WelocomeAdminController::class, 'WelcomeAdmin'])->name('Welcome');
@@ -60,6 +59,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     //Horario Clinica
     Route::get('/clinicas/{id}/horarios', [ClinicaController::class, 'ObtenerHorarios']);
     Route::post('/clinicas/horario/Alta', [ClinicaController::class, 'AgregarHorario'])->name('AltaHorario');
+    Route::delete('/clinica/{id}/{dia}/{apertura}/{cierre}/horario/Eliminar', [ClinicaController::class, 'EliminarHorario'])->name('EliminarHorario');
     
 
 });
