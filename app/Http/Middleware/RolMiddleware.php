@@ -12,7 +12,7 @@ class RolMiddleware
     {
         // Verifica si existe el rol en la sesión
         if (!$request->session()->has('rol')) {
-            return redirect('/login'); // o cualquier ruta que quieras
+            return redirect('/login');
         }
 
         // Verifica si coincide con el rol requerido

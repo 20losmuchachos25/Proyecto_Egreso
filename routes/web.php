@@ -13,14 +13,6 @@ use App\Http\Controllers\ClinicaController;
 // Ruta Principal
 Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Principal');
 
-// Regitro para registrar usuarios 
-    Route::get('/Registro', [RegistroController::class, 'index'])->name('verRegistro'); 
-    Route::post('/Registro', [RegistroController::class, 'NewUser'])->name('NuevoUsuario');
-
-    Route::get('/Gestor', [GestorController::class, 'index'])->name('verGestor');
-    Route::post('/Gestor/consulta', [GestorController::class, 'ConsultaDato'])->name('ConsultaDato');
-    Route::post('/Gestor/modificar', [GestorController::class, 'ModificarDato'])->name('ModificarDato');
-
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
 
@@ -30,6 +22,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('dashboard');
 
     // Rutas protegidas
+    // Regitro para registrar usuarios 
+    Route::get('/Registro', [RegistroController::class, 'index'])->name('verRegistro'); 
+    Route::post('/Registro', [RegistroController::class, 'NewUser'])->name('NuevoUsuario');
+
+    Route::get('/Gestor', [GestorController::class, 'index'])->name('verGestor');
+    Route::post('/Gestor/consulta', [GestorController::class, 'ConsultaDato'])->name('ConsultaDato');
+    Route::post('/Gestor/modificar', [GestorController::class, 'ModificarDato'])->name('ModificarDato');
 
     Route::get('/Desarrollo', [DesarrolloController::class, 'index'])->name('Desarrollo');
 
