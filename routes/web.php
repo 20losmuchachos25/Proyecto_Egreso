@@ -9,9 +9,15 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\WelocomeAdminController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClinicaController;
+use App\Http\Controllers\TelegramController;
+
 
 // Ruta Principal
 Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Principal');
+Route::get('/telegram/enviar', [TelegramController::class, 'enviarMensaje'])->name('Enviar');
+Route::post('/telegram/webhook', [TelegramController::class, 'webhook']);
+
+
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
