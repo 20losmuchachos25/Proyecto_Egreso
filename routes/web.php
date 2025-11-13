@@ -9,9 +9,15 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\WelocomeAdminController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ClinicaController;
+use App\Http\Controllers\TelegramController;
+
 
 // Ruta Principal
 Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Principal');
+Route::get('/telegram/enviar', [TelegramController::class, 'enviarMensaje'])->name('Enviar');
+Route::post('/telegram/webhook', [TelegramController::class, 'webhook']);
+
+
 
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -22,7 +28,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('dashboard');
 
     // Rutas protegidas
-
     // Regitro para registrar usuarios 
     Route::get('/Registro', [RegistroController::class, 'index'])->name('verRegistro'); 
     Route::post('/Registro', [RegistroController::class, 'NewUser'])->name('NuevoUsuario');
@@ -30,7 +35,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/Gestor', [GestorController::class, 'index'])->name('verGestor');
     Route::post('/Gestor/consulta', [GestorController::class, 'ConsultaDato'])->name('ConsultaDato');
     Route::post('/Gestor/modificar', [GestorController::class, 'ModificarDato'])->name('ModificarDato');
-
     Route::get('/Desarrollo', [DesarrolloController::class, 'index'])->name('Desarrollo');
 
     Route::get('/WelcomeAdmin', [WelocomeAdminController::class, 'WelcomeAdmin'])->name('Welcome');
@@ -61,6 +65,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     //Horario Clinica
     Route::get('/clinicas/{id}/horarios', [ClinicaController::class, 'ObtenerHorarios']);
     Route::post('/clinicas/horario/Alta', [ClinicaController::class, 'AgregarHorario'])->name('AltaHorario');
+    Route::delete('/clinica/{id}/{dia}/{apertura}/{cierre}/horario/Eliminar', [ClinicaController::class, 'EliminarHorario'])->name('EliminarHorario');
     
 
 });

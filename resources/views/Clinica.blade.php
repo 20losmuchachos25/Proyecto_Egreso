@@ -106,7 +106,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5">No se encontraron clinicas registradas.</td>
+                            <td colspan="6">No se encontraron clinicas registradas.</td>
                         </tr>
                     @endforelse
                 </tbody>

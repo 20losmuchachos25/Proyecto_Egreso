@@ -238,59 +238,92 @@ class ClinicaController extends Controller
         return response()->json($horario);
     }
     public function AgregarHorario(Request $request){
-    $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
         'IDOculto4' => 'required|integer',
         'Dia' => 'required',
         'Apertura' => 'required|date_format:H:i',
         'Cierre' => 'required|date_format:H:i'
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json([
-            'success' => false,
-            'errors' => $validator->errors()
         ]);
-    }
 
-    $idClinica = $request->IDOculto4;
-    $aperturaAlta = $request->Apertura;
-    $cierreAlta = $request->Cierre;
-
-    list($h, $m) = explode(':', $aperturaAlta);
-    $aperturaAlta1 = intval($h) * 60 + intval($m);
-
-    list($h, $m) = explode(':', $cierreAlta);
-    $cierreAlta1 = intval($h) * 60 + intval($m);
-
-    $horariosExistentes = Horario_Clinica::where('ID_Clinica', $idClinica)
-                            ->where('Dia', $request->Dia)
-                            ->get();
-
-    foreach ($horariosExistentes as $h) {
-        list($hh, $mm) = explode(':', $h->Hora_Apertura);
-        $aperturaBD = intval($hh) * 60 + intval($mm);
-
-        list($hh, $mm) = explode(':', $h->Hora_Cierre);
-        $cierreBD = intval($hh) * 60 + intval($mm);
-
-        if ($aperturaBD < $cierreAlta1 && $aperturaAlta1 < $cierreBD) {
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'mensaje' => 'El horario se solapa con otro existente.'
+                'errors' => $validator->errors()
             ]);
         }
+
+        $idClinica = $request->IDOculto4;
+        $aperturaAlta = $request->Apertura;
+        $cierreAlta = $request->Cierre;
+
+        list($h, $m) = explode(':', $aperturaAlta);
+        $aperturaAlta1 = intval($h) * 60 + intval($m);
+
+        list($h, $m) = explode(':', $cierreAlta);
+        $cierreAlta1 = intval($h) * 60 + intval($m);
+
+        $horariosExistentes = Horario_Clinica::where('ID_Clinica', $idClinica)
+                                ->where('Dia', $request->Dia)
+                                ->get();
+
+        foreach ($horariosExistentes as $h) {
+            list($hh, $mm) = explode(':', $h->Hora_Apertura);
+            $aperturaBD = intval($hh) * 60 + intval($mm);
+
+            list($hh, $mm) = explode(':', $h->Hora_Cierre);
+            $cierreBD = intval($hh) * 60 + intval($mm);
+
+            if ($aperturaBD < $cierreAlta1 && $aperturaAlta1 < $cierreBD) {
+                return response()->json([
+                    'success' => false,
+                    'mensaje' => 'El horario se solapa con otro existente.'
+                ]);
+            }
+        }
+
+        Horario_Clinica::create([
+            'ID_Clinica' => $idClinica,
+            'Dia' => $request->Dia,
+            'Hora_Apertura' => $aperturaAlta,
+            'Hora_Cierre' => $cierreAlta
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'mensaje' => 'Horario agregado correctamente.'
+        ]);
     }
+    public function EliminarHorario(Request $request){
+        $request->validate([
+            'IDOculto4' => 'required|integer',
+            'Dia' => 'required',
+            'Apertura' => 'required',
+            'Cierre' => 'required',
+        ]);
+        $Dia = $request->Dia;
+        $Apertura = $request->Apertura;
+        $Cierre = $request->Cierre;
+        $ID_Clinica = $request->IDOculto4;
 
-    Horario_Clinica::create([
-        'ID_Clinica' => $idClinica,
-        'Dia' => $request->Dia,
-        'Hora_Apertura' => $aperturaAlta,
-        'Hora_Cierre' => $cierreAlta
-    ]);
+        $validar = Horario_Clinica::where('Dia', $Dia)->where('Hora_Apertura', $Apertura)->where('Hora_Cierre', $Cierre)->where('ID_Clinica', $ID_Clinica)->delete();
 
-    return response()->json([
-        'success' => true,
-        'mensaje' => 'Horario agregado correctamente.'
-    ]);
-}
+        if($validar){
+            if ($validar) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Horario eliminado correctamente.'
+            ]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No se pudo eliminar el horario.'
+                ]);
+            }
+        }else{
+             return response()->json([
+            'success' => false,
+            'message' => 'Horario no encontrada.'
+        ]);
+        }
+    }
 }
