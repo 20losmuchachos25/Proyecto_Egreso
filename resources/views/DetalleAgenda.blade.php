@@ -56,7 +56,7 @@
         <br>
         <form action="{{ route('ModificarAgenda') }}" method="post">
             @csrf
-            <input type="hidden" id="id" name="id" value="{{ $agenda->id }}">
+            <input type="hidden" id="id_Agenda" name="id_Agenda" value="{{ $agenda->id }}">
 
             <label for="Fecha">Fecha</label>
             <input type="date" id="Fecha" name="Fecha" value="{{ $agenda->Fecha }}">

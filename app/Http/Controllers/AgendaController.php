@@ -48,15 +48,17 @@ class AgendaController extends Controller
     }
 
     public function Modificar_Agenda(Request $request){
+        dd($request->all());
+
         $request->validate([
-            'id' => 'required|integer',
+            'id_Agenda' => 'required|integer',
             'Motivo' => 'required|string',
             'Fecha' => 'required|date',
             'Hora' => 'required|date_format:H:i',
             'Tratamientos' => 'nullable|string'
         ]);
 
-        $agenda = Agenda::findOrFail($request->id);
+        $agenda = Agenda::findOrFail($request->id_Agenda);
 
         if ($request->Tratamientos == 'Seleccionar...') {
             $agenda->Motivo = $request->Motivo;
