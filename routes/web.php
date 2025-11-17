@@ -66,6 +66,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/clinicas/{id}/horarios', [ClinicaController::class, 'ObtenerHorarios']);
     Route::post('/clinicas/horario/Alta', [ClinicaController::class, 'AgregarHorario'])->name('AltaHorario');
     Route::delete('/clinica/{id}/{dia}/{apertura}/{cierre}/horario/Eliminar', [ClinicaController::class, 'EliminarHorario'])->name('EliminarHorario');
+
+    Route::post('/buscar-clinicas-especialidad', [ClinicaController::class, 'buscarPorEspecialidad']);
     
 
 });

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/detalle_agenda/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tables/table.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
 </head>
@@ -13,29 +14,47 @@
         <img src="{{ asset('img/dental_sense.png') }}" alt="" class="logo">
         <h2>Detalle de Agenda</h2>
     </header>
+    <br>
     <div class="cuerpo">
-
-        <label for="Documento">Documento</label>
-        <input type="number" id="Documento" name="Documento" value="{{ $agenda->Doc_Cliente }}" readonly>
+        <table id="agenda_detalle">
+                <thead>
+                    <tr>
+                        <th colspan="2" style="text-align: center;">Datos</th>
+                    </tr>
+                    <tr>
+                        <th>Documento</th>
+                        <td>{{$agenda->Doc_Cliente}}</td>
+                    </tr>
+                    <tr>
+                        <th>Nombre</th>
+                        <td>{{$agenda->usuario->Primer_Nombre}}</td>
+                    </tr>
+                    <tr>
+                        <th>Apellido</th>
+                        <td>{{$agenda->usuario->Primer_Apellido}}</td>
+                    </tr>
+                    <tr>
+                        <th>Mutualista</th>
+                        <td>{{$agenda->usuario->Mutualista}}</td>
+                    </tr>
+                    <tr>
+                        <th>Celular</th>
+                        <td>{{$agenda->usuario->Celular}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{$agenda->usuario->Email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Motivo</th>
+                        <td>{{ $agenda->Motivo }}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"></th>
+                    </tr>
+                </thead>
+            </table>
         <br>
-        <br>
-        <label for="Nombre">Nombre</label>
-        <input type="text" id="Nombre" name="Nombre" value="{{ $agenda->usuario->Primer_Nombre }}" readonly>
-
-        <label for="Apellido">Apellido</label>
-        <input type="text" id="Apellido" name="Apellido" value="{{ $agenda->usuario->Primer_Apellido }}" readonly>
-        <br><br>
-        <label for="Mutualista">Mutualista</label>
-        <input type="text" id="Mutualista" name="Mutualista" value="{{ $agenda->usuario->Mutualista }}" readonly>
-
-        <label for="Celular">Celular</label>
-        <input type="tel" id="Celular" name="Celular" value="{{ $agenda->usuario->Celular }}" readonly>
-
-        <label for="Email">Email</label>
-        <input type="email" id="Email" name="Email" value="{{ $agenda->usuario->Email }}" readonly>
-        <br>
-        <br>
-
         <form action="{{ route('ModificarAgenda') }}" method="post">
             @csrf
             <input type="hidden" id="id" name="id" value="{{ $agenda->id }}">
@@ -46,14 +65,12 @@
             <label for="Hora">Hora</label>
             <input type="time" id="Hora" name="Hora" value="{{ $agenda->Hora }}">
             <br><br>
-            <label for="Motivo">Motivo</label>
-            <textarea name="Motivo" id="Motivo" > {{ $agenda->Motivo }}</textarea>
-            <br><br>
+            
             <label for="Tratamientos">Tratamientos</label>
             <select class="select" id="Tratamientos" name="Tratamientos">
                 <option value="">Seleccionar...</option>
             @forelse($tratamientos as $tratamiento)
-                <option>{{ $tratamiento->Nombre }}</option>
+                <option value="{{ $tratamiento->Nombre }}">{{ $tratamiento->Nombre }}</option>
             @empty
                 <option disabled>No hay tratamientos</option>
             @endforelse
@@ -100,5 +117,6 @@
         </form>
 
     </div>
+    <script src="{{ asset('js/especialidad_clinica.js') }}"></script>
 </body>
 </html>

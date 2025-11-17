@@ -16,4 +16,8 @@ class Especializacion_Clinica extends Model
         'ID_Clinica',
         'Especializacion'
     ];
+    public function clinica()
+    {
+        return $this->belongsTo(Clinica::class, 'ID_Clinica', 'ID_Clinica');
+    }
 }

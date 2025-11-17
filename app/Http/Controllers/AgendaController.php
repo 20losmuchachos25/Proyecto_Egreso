@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
-    public function Agenda()
-    {
+    public function Agenda(){
         $agendas = Agenda::with(['cliente', 'usuario'])->get();        
         return view('Agenda', compact('agendas'));    
     }
 
-    public function Registro_Agenda()
-    {
+    public function Registro_Agenda(){
         return view('Registro_Agenda');
     }
 

@@ -7,6 +7,8 @@ use App\Models\Clinica;
 use App\Models\Telefono_Clinica;
 use App\Models\Especializacion_Clinica;
 use App\Models\Horario_Clinica;
+use App\Models\Tratamiento;
+
 use Illuminate\Support\Facades\Validator;
 
 
@@ -325,5 +327,18 @@ class ClinicaController extends Controller
             'message' => 'Horario no encontrada.'
         ]);
         }
+    }
+    //Agenda
+    public function buscarPorEspecialidad(Request $request){
+        $request->validate([
+            'especializacion' => 'required|string'
+        ]);
+
+        $clinicas = Clinica::whereHas('especializaciones', function ($q) use ($request) {
+            $q->where('Especializacion', $request->especializacion);
+        })
+        ->get(['ID_Clinica', 'Direccion']);
+
+        return response()->json($clinicas);
     }
 }

@@ -13,4 +13,8 @@ class Clinica extends Model
     protected $fillable = [
         'Direccion'
     ];
+    public function especializaciones()
+    {
+        return $this->hasMany(Especializacion_Clinica::class, 'ID_Clinica', 'ID_Clinica');
+    }
 }
