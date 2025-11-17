@@ -17,6 +17,10 @@ Route::get('/Principal', [PrincipalController::class, 'Principal'])->name('Princ
 Route::get('/telegram/enviar', [TelegramController::class, 'enviarMensaje'])->name('Enviar');
 Route::post('/telegram/webhook', [TelegramController::class, 'webhook']);
 
+// Regitro para registrar usuarios 
+    Route::get('/Registro', [RegistroController::class, 'index'])->name('verRegistro'); 
+    Route::post('/Registro', [RegistroController::class, 'NewUser'])->name('NuevoUsuario');
+
 
 
 
@@ -28,9 +32,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     })->name('dashboard');
 
     // Rutas protegidas
-    // Regitro para registrar usuarios 
-    Route::get('/Registro', [RegistroController::class, 'index'])->name('verRegistro'); 
-    Route::post('/Registro', [RegistroController::class, 'NewUser'])->name('NuevoUsuario');
+    
 
     Route::get('/Gestor', [GestorController::class, 'index'])->name('verGestor');
     Route::post('/Gestor/consulta', [GestorController::class, 'ConsultaDato'])->name('ConsultaDato');
@@ -67,7 +69,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/clinicas/horario/Alta', [ClinicaController::class, 'AgregarHorario'])->name('AltaHorario');
     Route::delete('/clinica/{id}/{dia}/{apertura}/{cierre}/horario/Eliminar', [ClinicaController::class, 'EliminarHorario'])->name('EliminarHorario');
 
-    Route::post('/buscar-clinicas-especialidad', [ClinicaController::class, 'buscarPorEspecialidad']);
+    Route::post('/buscar-clinicas-especialidad', [ClinicaController::class, 'buscarPorEspecialidad'])->name('BuscarClinicasEspecialidad');
     
 
 });

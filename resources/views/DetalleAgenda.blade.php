@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/detalle_agenda/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tables/table.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
+    
 </head>
 <body>
     <header>
@@ -87,17 +86,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-documento="">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4">No se encontraron clinicas registradas para este tratamiento.</td>
-                    </tr>
                 </tbody>
             </table>
             <br><br>
