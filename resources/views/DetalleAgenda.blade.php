@@ -57,6 +57,11 @@
         <form action="{{ route('ModificarAgenda') }}" method="post">
             @csrf
             <input type="hidden" id="id" name="id" value="{{ $agenda->id }}">
+            <input type="hidden" id="Motivo" name="Motivo" value="{{ $agenda->Motivo }}">
+            <input type="hidden" id="MotivoOriginal" value="{{ $agenda->Motivo }}">
+
+            <input type="hidden" id="ClinicaSeleccionada" name="ID_Clinica">
+
 
             <label for="Fecha">Fecha</label>
             <input type="date" id="Fecha" name="Fecha" value="{{ $agenda->Fecha }}">
@@ -106,5 +111,33 @@
 
     </div>
     <script src="{{ asset('js/especialidad_clinica.js') }}"></script>
+    <script>
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('btnSeleccionarClinica')) {
+                const idClinica = e.target.dataset.id;
+
+                document.getElementById('ClinicaSeleccionada').value = idClinica;
+
+                alert("Clínica seleccionada: " + idClinica);
+            }
+        });
+
+    </script>
+    <script>
+        document.getElementById('Tratamientos').addEventListener('change', function () {
+
+            const motivoOriginal = document.getElementById('MotivoOriginal').value;
+            const tratamiento = this.value.trim();
+
+            if (tratamiento === "") {
+                document.getElementById('Motivo').value = motivoOriginal;
+            } else {
+                document.getElementById('Motivo').value = motivoOriginal + " (" + tratamiento + ")";
+            }
+        });
+    </script>
+
+    
+
 </body>
 </html>

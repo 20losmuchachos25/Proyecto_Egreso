@@ -21,6 +21,9 @@ Route::post('/telegram/webhook', [TelegramController::class, 'webhook']);
     Route::get('/Registro', [RegistroController::class, 'index'])->name('verRegistro'); 
     Route::post('/Registro', [RegistroController::class, 'NewUser'])->name('NuevoUsuario');
 
+    Route::get('/AgendasClinicas', [AgendaController::class, 'Buscar_Agendas_Clinica_Medico'])->name('AgendasClinicas');
+
+
 
 
 
@@ -31,10 +34,20 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         return view('WelcomeAdmin');
     })->name('dashboard');
 
+    Route::get('/Medico', function () {
+        return view('WelcomeMED');
+    })->name('WelcomeMED');
+
+
     // Rutas protegidas
     
 
-    Route::get('/Gestor', [GestorController::class, 'index'])->name('verGestor');
+    Route::get('/Gestor', [GestorController::class, 'index'])->name('verGestor');    
+    Route::get('/Gestor/Funcionario', [GestorController::class, 'index_funcionario'])->name('verGestorFuncionario');
+    Route::get('/Gestor/Clientes', [GestorController::class, 'index_clientes'])->name('verGestorClientes');
+    Route::get('/Gestor/Administrativos', [GestorController::class, 'index_administrativos'])->name('verGestorAdministrativos');
+
+
     Route::post('/Gestor/consulta', [GestorController::class, 'ConsultaDato'])->name('ConsultaDato');
     Route::post('/Gestor/modificar', [GestorController::class, 'ModificarDato'])->name('ModificarDato');
     Route::get('/Desarrollo', [DesarrolloController::class, 'index'])->name('Desarrollo');

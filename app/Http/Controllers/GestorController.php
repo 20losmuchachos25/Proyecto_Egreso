@@ -7,15 +7,35 @@ use App\Models\Usuario;
 
 class GestorController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $usuarios = Usuario::with(['cliente', 'funcionario', 'administrativo'])->get();
         
 
         return view('Gestor', compact('usuarios')); // Apunta a resources/views/Gestro.blade.php
     }
-    public function ConsultaDato(Request $request)
-    {
+    public function index_funcionario() {
+        $usuarios = Usuario::whereHas('funcionario')
+            ->with('funcionario')
+            ->get();
+
+        return view('Gestor', compact('usuarios'));
+    }
+    public function index_clientes() {
+        $usuarios = Usuario::whereHas('cliente')
+            ->with('cliente')
+            ->get();
+
+        return view('Gestor', compact('usuarios'));
+    }
+    public function index_administrativos() {
+        $usuarios = Usuario::whereHas('administrativo')
+            ->with('administrativo')
+            ->get();
+
+        return view('Gestor', compact('usuarios'));
+    }
+
+    public function ConsultaDato(Request $request){
         $documento = $request->input('id');
         $campo = $request->input('dato');
         
@@ -35,8 +55,7 @@ class GestorController extends Controller
             ]);
         }
     }
-    public function ModificarDato(Request $request)
-    {
+    public function ModificarDato(Request $request){
         $documento = $request->input('id');
         $campo = $request->input('dato');
         $valor = $request->input('valor');

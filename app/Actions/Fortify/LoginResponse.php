@@ -19,7 +19,7 @@ class LoginResponse implements LoginResponseContract
             case 'Funcionario':
                 session(['Documento' => $user->Documento]);
                 session(['rol' => $user->tipo_usuario]);
-                return redirect()->route('Desarrollo');
+                return redirect()->route('WelcomeMED');
             case 'Administrativo':
                 session(['Documento' => $user->Documento]);
                 session(['rol' => $user->tipo_usuario]);

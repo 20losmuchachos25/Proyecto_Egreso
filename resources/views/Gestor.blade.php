@@ -21,6 +21,13 @@
                 </form>
             </div>
             <div class="column-right">
+                <form action="{{ route('verGestorFuncionario') }}"><input type="submit" value="Funcionarios"></form><br>
+                <form action="{{ route('verGestorClientes') }}"><input type="submit" value="Clientes"></form><br>
+                <form action="{{ route('verGestorAdministrativos') }}"><input type="submit" value="Administrativos"></form><br>
+                <form action="{{ route('verGestor') }}"><input type="submit" value="Usuarios"></form><br>
+
+
+                <br>
                 {{-- Tabla de usuarios --}}
                     <table id="usuarios">
                         <thead>
@@ -61,7 +68,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="13">No se encontraron usuarios registrados.</td>
+                                    <td colspan="14">No se encontraron usuarios registrados.</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -91,9 +98,6 @@
                                         <label id="documento">Documento </label>   
                                         <input id="Documento" type="text" name="Documento" readonly>
                                         <input type="hidden" id="documentooculto" name="documentooculto">
-                                        <button type="button" onclick="habilitarInput(document.getElementById('Documento'))"><i class="fas fa-pen"></i></button>
-                                        <button type="button" onclick="ModificarInput(document.getElementById('Documento'))"><i class="fas fa-check"></i></button>
-                                        <button type="button" onclick="deshabilitarInput(document.getElementById('Documento'))"><i class="fas fa-times"></i></button>
                                     </section>
                             
                                     <section id="primnombre">  

@@ -71,7 +71,10 @@ document.getElementById('Tratamientos').addEventListener('change', function () {
                     <td>${clinica.Direccion}</td>
                     <td>(por definir)</td>
                     <td>
-                        <input type="checkbox" class="seleccionarClinica">
+                        <button type="button" class="btnSeleccionarClinica"
+                            data-id="${clinica.ID_Clinica}">
+                            Seleccionar
+                        </button>
                     </td>
                 </tr>
             `;

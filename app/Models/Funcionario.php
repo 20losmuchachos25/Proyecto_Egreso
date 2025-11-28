@@ -16,4 +16,14 @@ class Funcionario extends Model
     protected $fillable = [
         'Documento_Funcionario'
     ];
+
+    public function clinicas(){
+        return $this->belongsToMany(
+            Clinica::class,
+            'trabaja',           // Nombre de la tabla pivote
+            'Doc_Funcionario',   // FK en pivote que apunta a funcionario
+            'ID_Clinica'         // FK en pivote que apunta a clínica
+        );
+    }
+
 }
