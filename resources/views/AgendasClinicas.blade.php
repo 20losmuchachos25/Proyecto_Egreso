@@ -33,6 +33,7 @@
                                 <th>Duración</th>
                                 <th>Estado</th>
                                 <th>Motivo</th>
+                                <th>Tratamiento</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,10 +46,11 @@
                                     <td>{{ $agenda->Duracion }}</td>
                                     <td>{{ $agenda->Estado_Cita }}</td>
                                     <td>{{ $agenda->Motivo }}</td>
+                                    <td>{{ $agenda->Tratamiento }}</td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="14">No se encontraron agendas registrados.</td>
+                                    <td colspan="7">No se encontraron agendas registrados.</td>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -13,6 +13,16 @@
         <img src="{{ asset('img/dental_sense.png') }}" alt="" class="logo">
         <h2>Detalle de Agenda</h2>
     </header>
+            {{-- Mensajes de validación --}}
+            @if ($errors->any())
+                <div style="color: red;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <br>
     <div class="cuerpo">
         <table id="agenda_detalle">
@@ -49,6 +59,10 @@
                         <td>{{ $agenda->Motivo }}</td>
                     </tr>
                     <tr>
+                        <th>Tratamiento</th>
+                        <td>{{ $agenda->Tratamiento }}</td>
+                    </tr>
+                    <tr>
                         <th colspan="2"></th>
                     </tr>
                 </thead>
@@ -58,7 +72,9 @@
             @csrf
             <input type="hidden" id="id" name="id" value="{{ $agenda->id }}">
             <input type="hidden" id="Motivo" name="Motivo" value="{{ $agenda->Motivo }}">
-            <input type="hidden" id="MotivoOriginal" value="{{ $agenda->Motivo }}">
+            <input type="hidden" id="Tratamiento" name="Tratamiento">
+            <input type="hidden" id="Duracion" name="Duracion">
+
 
             <input type="hidden" id="ClinicaSeleccionada" name="ID_Clinica">
 
@@ -74,7 +90,7 @@
             <select class="select" id="Tratamientos" name="Tratamientos">
                 <option value="">Seleccionar...</option>
             @forelse($tratamientos as $tratamiento)
-                <option value="{{ $tratamiento->Nombre }}">{{ $tratamiento->Nombre }}</option>
+                <option value="{{ $tratamiento->Nombre }}" data-duracion="{{ $tratamiento->Duracion }}">{{ $tratamiento->Nombre }} </option>
             @empty
                 <option disabled>No hay tratamientos</option>
             @endforelse
@@ -126,14 +142,13 @@
     <script>
         document.getElementById('Tratamientos').addEventListener('change', function () {
 
-            const motivoOriginal = document.getElementById('MotivoOriginal').value;
-            const tratamiento = this.value.trim();
+            const opcion = this.options[this.selectedIndex];
+            const tratamiento = opcion.value;
+            const duracion = opcion.dataset.duracion;
 
-            if (tratamiento === "") {
-                document.getElementById('Motivo').value = motivoOriginal;
-            } else {
-                document.getElementById('Motivo').value = motivoOriginal + " (" + tratamiento + ")";
-            }
+            document.getElementById('Tratamiento').value = tratamiento;
+            document.getElementById('Duracion').value = duracion;
+
         });
     </script>
 

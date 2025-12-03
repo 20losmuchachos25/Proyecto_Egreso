@@ -50,22 +50,46 @@ class AgendaController extends Controller
     }
 
     public function Modificar_Agenda(Request $request){
-        dd($request->all());
-
         $agenda = Agenda::findOrFail($request->id);
         $agenda->Motivo = $request->Motivo;
         $agenda->Fecha = $request->Fecha;
         $agenda->Hora = $request->Hora;
         $agenda->Estado_Cita = $request->Estado_Cita;
+        $agenda->Duracion = $request->Duracion ?? $agenda->Duracion;
+        $agenda->Tratamiento = $request->Tratamiento ?? $agenda->Tratamiento;
+
 
         $agenda->save();
 
-        if (!empty($request->ID_Clinica)) {
+        if($request->Estado_Cita == 'Declinado'){
+            Pertenece_Agenda::where('id_agenda', $request->id)
+                ->where('id_clin', $request->ID_Clinica)->delete();
 
-            Pertenece_Agenda::create([
-                'id_agenda' => $request->id,
-                'id_clin'   => $request->ID_Clinica
-            ]);
+            return back()->withErrors(['Cita declinada.'])->withInput();
+            return redirect()->route('Agenda');
+        }
+        elseif($request->Estado_Cita == 'Cancelado'){
+            Pertenece_Agenda::where('id_agenda', $request->id)
+                ->where('id_clin', $request->ID_Clinica)->delete();
+
+            return back()->withErrors(['Cita cancelada.'])->withInput();
+            return redirect()->route('Agenda');
+        }
+        else{
+            if (!empty($request->ID_Clinica)) {
+                $existe = Pertenece_Agenda::where('id_agenda', $request->id)
+                ->where('id_clin', $request->ID_Clinica)
+                ->exists();
+
+                if ($existe) {
+                    return back()->withErrors(['Esta agenda ya está asociada a esa clínica.'])->withInput();
+                }
+
+                Pertenece_Agenda::create([
+                    'id_agenda' => $request->id,
+                    'id_clin'   => $request->ID_Clinica
+                ]);
+            }
         }
 
         return redirect()->route('Agenda');
@@ -83,12 +107,10 @@ class AgendaController extends Controller
         // 2. Traer las agendas asociadas a esas clínicas mediante JOIN
         $agendas = Agenda::join('pertenece_agenda', 'agenda.id', '=', 'pertenece_agenda.id_agenda')
             ->whereIn('pertenece_agenda.id_clin', $clinicas)
-            ->select('agenda.*')   // ← importante
+            ->where('agenda.Estado_Cita', '<>', 'DECLINADO')   // ← condición extra
+            ->select('agenda.*')
             ->get();
 
         return view('AgendasClinicas', compact('agendas'));
     }
-
-    
-
 }

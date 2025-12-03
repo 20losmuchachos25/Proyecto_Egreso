@@ -12,12 +12,13 @@ class Agenda extends Model
 
     
     protected $fillable = [
-        'Doc_Cliente','Fecha','Hora','Duracion','Estado_Cita','Motivo'
+        'Doc_Cliente','Fecha','Hora','Duracion','Estado_Cita','Motivo','Tratamiento'
     ];
 
     protected $attributes = [
         'Estado_Cita' => 'Pendiente de confirmación', // Valor por defecto en el modelo
         'Duracion' => 0,
+        'Tratamiento' => 'Sin confirmar',
     ];
 
     // Relación con Cliente

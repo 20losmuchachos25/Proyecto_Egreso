@@ -34,6 +34,7 @@
                                 <th>Fecha</th>
                                 <th>Hora</th>
                                 <th>Motivo</th>
+                                <th>Tratamiento</th>
                                 <th>Duracion Aprox (min)</th>
                                 <th>Estado</th>
                                 <th>Acción</th>
@@ -52,6 +53,7 @@
                                     <td>{{ $agenda->Fecha }}</td>
                                     <td>{{ $agenda->Hora }}</td>
                                     <td>{{ $agenda->Motivo }}</td>
+                                    <td>{{ $agenda->Tratamiento }}</td>
                                     <td>{{ $agenda->Duracion }}</td>
                                     <td>{{ $agenda->Estado_Cita }}</td>
                                     <td>
