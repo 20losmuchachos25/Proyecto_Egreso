@@ -6,6 +6,7 @@ use App\Models\Tratamiento;
 use Illuminate\Http\Request;
 use App\Models\Pertenece_Agenda;
 use App\Models\Funcionario;
+use App\Http\Controllers\MailController;
 
 class AgendaController extends Controller
 {
@@ -65,12 +66,18 @@ class AgendaController extends Controller
             Pertenece_Agenda::where('id_agenda', $request->id)
                 ->where('id_clin', $request->ID_Clinica)->delete();
 
+            $mailController = new MailController();
+            return $mailController->Notificar_Reserva($request);
+
             return back()->withErrors(['Cita declinada.'])->withInput();
             return redirect()->route('Agenda');
         }
         elseif($request->Estado_Cita == 'Cancelado'){
             Pertenece_Agenda::where('id_agenda', $request->id)
                 ->where('id_clin', $request->ID_Clinica)->delete();
+
+            $mailController = new MailController();
+            return $mailController->Notificar_Reserva($request);
 
             return back()->withErrors(['Cita cancelada.'])->withInput();
             return redirect()->route('Agenda');
@@ -92,6 +99,8 @@ class AgendaController extends Controller
             }
         }
 
+        $mailController = new MailController();
+        return $mailController->Notificar_Reserva($request);
         return redirect()->route('Agenda');
     }
 
